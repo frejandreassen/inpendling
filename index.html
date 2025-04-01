@@ -315,9 +315,12 @@
             margin-bottom: 0;
         }
 
-        /* Så går studien till */
-        #studien {
-            background-color: var(--bg-alt-color);
+                /* --- Så går studien till (Clickable Cards Fix Included) --- */
+                #studien {
+            /* background-color: var(--bg-alt-color); */ /* Ensure correct alternating background if needed, might be white */
+             background-color: #fff;
+             padding-top: 5rem; /* Adjust padding if needed */
+             padding-bottom: 5rem;
         }
 
         #studien .study-steps {
@@ -325,51 +328,74 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
-            max-width: 900px;
+            max-width: 900px; /* Adjust max-width if needed */
             margin-left: auto;
             margin-right: auto;
         }
 
-        #studien .step-item {
+        /* Target the <a> tag itself for layout, base style, and hover effects */
+        #studien a.step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
             background-color: var(--card-bg-color);
             padding: 1.5rem;
             border-radius: var(--border-radius-md);
             box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: flex-start;
-            /* Align icon top */
-            gap: 1.5rem;
+            border: 1px solid #eee; /* Subtle border */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none; /* Remove underline from the link container */
+            color: inherit; /* Inherit default text color */
         }
 
-        #studien .step-item:hover {
+        #studien a.step-item:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
+            /* Add other hover effects for the card if desired */
         }
 
-        #studien .step-icon i {
+        /* Style the icon inside the link */
+        #studien a.step-item .step-icon i {
             font-size: 2rem;
             color: var(--primary-color);
             margin-top: 5px;
-            /* Align icon nicely */
             width: 40px;
-            /* Fixed width for alignment */
             text-align: center;
+            flex-shrink: 0; /* Prevent icon shrinking */
         }
 
-        #studien .step-text h3 {
+        /* --- CRITICAL: Override default link styles for text INSIDE the card --- */
+        #studien a.step-item .step-text h3,
+        #studien a.step-item .step-text p {
+            text-decoration: none !important; /* FORCE no underline */
+            color: inherit !important; /* FORCE inherit color initially */
+        }
+
+        /* Re-apply the INTENDED text styles for h3 inside the link */
+        #studien a.step-item .step-text h3 {
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--secondary-color);
+            color: var(--secondary-color) !important; /* FORCE correct heading color */
             margin-bottom: 0.5rem;
         }
 
-        #studien .step-text p {
+        /* Re-apply the INTENDED text styles for p inside the link */
+        #studien a.step-item .step-text p {
             font-size: 0.95rem;
-            color: var(--text-light);
+            color: var(--text-light) !important; /* FORCE correct paragraph color */
             line-height: 1.5;
             margin-bottom: 0;
         }
+
+        /* Ensure text color does NOT change on card hover */
+        #studien a.step-item:hover .step-text h3 {
+            color: var(--secondary-color) !important; /* Keep heading color */
+        }
+
+        #studien a.step-item:hover .step-text p {
+             color: var(--text-light) !important; /* Keep paragraph color */
+        }
+        /* --- End of Link Style Override --- */
 
         /* Möjligheter (Varför delta?) - Using Step Cards */
         #möjligheter {
@@ -1251,22 +1277,24 @@
                 <h2>Så går studien till – vi behöver din hjälp!</h2>
                 <p class="section-subtitle">För att få en korrekt och heltäckande bild av nuläget och behoven samlar vi in data direkt från er som berörs mest – företagen och medarbetarna.</p>
                 <div class="study-steps">
-                    <div class="step-item">
+
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSenMwAyirlxuIFTeVLfvyRu9JQvvLjMLM46YZGVwLDwR-D3Ew/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="step-item">
                         <div class="step-icon"><i class="fa-solid fa-building"></i></div>
                         <div class="step-text">
-                            <!-- Corrected: Företagsenkät -->
                             <h3>Företagsenkät</h3>
                             <p>Information om antal anställda, typiska arbetstider (inkl. skift), och företagets perspektiv på transporter, rekryteringsutmaningar och hållbarhet.</p>
                         </div>
-                    </div>
-                    <div class="step-item">
+                    </a>
+                
+                    <!-- Add the second link for Medarbetarenkät here in the same way -->
+                    <a href="#enkat-medarbetare-kommer-snart" target="_blank" rel="noopener noreferrer" class="step-item">
                          <div class="step-icon"><i class="fa-solid fa-user-group"></i></div>
                          <div class="step-text">
-                             <!-- Corrected: Medarbetarenkät -->
                              <h3>Medarbetarenkät</h3>
                              <p>Fokus på individuella pendlingsvanor: nuvarande transportmedel, restider, start-/sluttider, samt upplevda hinder och önskemål kring kollektiva lösningar.</p>
                         </div>
-                    </div>
+                    </a>
+                
                 </div>
                 <p style="text-align: center; margin-top: 3rem; color: var(--text-light);">
                     Båda enkäterna lanseras inom kort. Ditt deltagande är <b>avgörande</b> för studiens framgång!
@@ -1390,12 +1418,27 @@
                  <p style="margin-top: 2rem; font-size: 0.9rem; color: #a0aec0;">(Enkäterna lanseras inom kort - sidan uppdateras då med aktiva länkar)</p>
             </div>
         </section>
+        <!-- === Placeholder Section: Medarbetarenkät === -->
+        <section id="enkat-medarbetare-kommer-snart" class="content-section animated-section" style="background-color: var(--bg-alt-color); padding-top: 3rem; padding-bottom: 3rem;">
+            <div class="container" style="max-width: 700px; text-align: center;">
+                <!-- Corrected: Enkät för medarbetare (länk kommer) -->
+                <h2>Enkät för medarbetare (länk kommer)</h2>
+                <p style="color: var(--text-light); font-size: 1rem; margin-top: 1rem;">
+                    Här kommer länken till enkäten för medarbetare att publiceras inom kort. Denna enkät riktar sig till alla som arbetar hos företag i de berörda verksamhetsområdena och pendlar in till Falkenberg. Svaren är viktiga för att förstå individuella behov och utmaningar. Håll utkik!
+                </p>
+                <!-- Optional: You could add an icon here if you want, but keeping it simple -->
+                <!-- <div style="font-size: 2rem; color: var(--primary-color); margin-top: 1.5rem;">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div> -->
+            </div>
+       </section>
+       <!-- === End Placeholder Section === -->
     </main>
 
     <footer>
         <div class="container">
             <p>© <span id="current-year"></span> Falkenbergs Kommun - Näringslivsenheten | Förstudie inpendling verksamhetsområden</p>
-            <p style="margin-top: 0.5rem;"><a href="https://www.falkenberg.se" target="_blank" rel="noopener noreferrer">www.falkenberg.se</a></p>
+            <p style="margin-top: 0.5rem;"><a href="https://www.falkenbergsnaringsliv.se" target="_blank" rel="noopener noreferrer">www.falkenbergsnaringsliv.se</a></p>
         </div>
     </footer>
 
