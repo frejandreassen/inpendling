@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Förstudie Inpendling Falkenberg | Påverka Framtidens Resor</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Icons (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- Förstklassiga Grundinställningar & Variabler --- */
+        :root {
+            --primary-color: #358a90;
+            /* Teal from original reference */
+            --primary-darker: #2a6b70;
+            /* Darker teal */
+            --secondary-color: #121f3a;
+            /* Keeping the deep blue for contrast */
+            --accent-color: #ff5a5f;
+            /* Optional accent */
+            --text-color: #2d3748;
+            /* Dark grey text */
+            --text-light: #4a5568;
+            /* Lighter grey */
+            --bg-color: #ffffff;
+            /* White background */
+            --bg-alt-color: #f7fafc;
+            /* Subtle grey */
+            --card-bg-color: #ffffff;
+            --footer-bg-color: var(--secondary-color);
+            --footer-text-color: #a0aec0;
+            /* Soft footer text */
+
+            --base-font-size: 17px;
+            --border-radius-lg: 16px;
+            --border-radius-md: 10px;
+            --transition-speed: 0.4s;
+            --transition-timing: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: var(--base-font-size);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.7;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Hero Header --- */
+        header.hero {
+            /* Use teal gradient */
+            background: linear-gradient(135deg, var(--primary-color) 0%, #5abfbf 100%);
+            color: #ffffff;
+            /* White text on teal */
+            padding: 7rem 0 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
+            margin-bottom: -60px;
+            z-index: 1;
+        }
+
+        header.hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        header.hero h1 {
+            font-size: clamp(2.3rem, 5.5vw, 4rem);
+            /* Slightly adjusted size */
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Softer shadow */
+            line-height: 1.2;
+            max-width: 850px;
+            /* Adjusted width */
+            margin-left: auto;
+            margin-right: auto;
+            color: #ffffff;
+            /* Ensure white */
+        }
+
+        header.hero p.subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            color: #f0f0f0;
+            /* Light grey/off-white for subtitle */
+            opacity: 0.95;
+        }
+
+        /* Scroll down indicator */
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            color: #ffffff;
+            /* White indicator */
+            padding-top: 15px;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            40% {
+                transform: translate(-50%, -10px);
+            }
+
+            60% {
+                transform: translate(-50%, -5px);
+            }
+        }
+
+        /* --- Generell Sektionsstyling --- */
+        .content-section {
+            padding: 5rem 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s var(--transition-timing), transform 0.8s var(--transition-timing);
+        }
+
+        .content-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Alternating background */
+        .content-section:nth-of-type(even):not(.parallax-section):not(#kontakt) {
+            /* Exclude parallax and contact */
+            background-color: var(--bg-alt-color);
+        }
+
+
+        section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: var(--secondary-color);
+            /* Dark blue heading */
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        section .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        section h2 i {
+            /* Style for icons in H2 */
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 0.8em;
+            /* Slightly smaller than text */
+            vertical-align: baseline;
+        }
+
+        /* --- Specifika Sektioner --- */
+
+        /* Bakgrund & Syfte */
+        #bakgrund {
+            z-index: 0;
+            padding-top: 8rem;
+            /* Compensate for header overlap */
+        }
+
+        #bakgrund .intro-content {
+            /* Keep single column for this longer text */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #bakgrund h2 {
+            text-align: left;
+            /* Align H2 left */
+            margin-bottom: 1.5rem;
+        }
+
+        #bakgrund p {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        #bakgrund strong,
+        #bakgrund b {
+            color: var(--primary-color);
+            /* Teal for emphasis */
+            font-weight: 600;
+        }
+
+        #bakgrund .text-link {
+            font-weight: bold;
+            color: var(--primary-darker);
+            text-decoration: underline;
+        }
+
+        #bakgrund .text-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Parallax Bild Sektion */
+        .parallax-section {
+            padding: 0;
+            min-height: 55vh;
+            /* Adjusted height */
+            max-height: 600px;
+            /* Choose a relevant Falkenberg image or keep the Kattegattleden one */
+            background-image: linear-gradient(to bottom, rgba(18, 31, 58, 0.4), rgba(18, 31, 58, 0.6)), url('https://cdn.hoodin.com/kattegattleden/images/161ynb3besjawzqw3fy3jqnbtq9yz4wi/original.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            opacity: 1;
+            transform: none;
+            transition: none;
+            margin: 0;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .parallax-content {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            /* Slightly more transparent */
+            border-radius: var(--border-radius-md);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out 0.5s, transform 0.8s ease-out 0.5s;
+        }
+
+        .parallax-section.is-visible .parallax-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .parallax-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .parallax-content p {
+            font-size: 1.1rem;
+            color: #eee;
+            margin-bottom: 0;
+        }
+
+        /* Så går studien till */
+        #studien {
+            background-color: var(--bg-alt-color);
+        }
+
+        #studien .study-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #studien .step-item {
+            background-color: var(--card-bg-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: flex-start;
+            /* Align icon top */
+            gap: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #studien .step-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        #studien .step-icon i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-top: 5px;
+            /* Align icon nicely */
+            width: 40px;
+            /* Fixed width for alignment */
+            text-align: center;
+        }
+
+        #studien .step-text h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        #studien .step-text p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* Möjligheter (Varför delta?) - Using Step Cards */
+        #möjligheter {
+            /* Standard background */
+        }
+
+        .opportunities-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            /* Reusing step-card style from source */
+            background-color: var(--card-bg-color);
+            padding: 2rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition-speed) var(--transition-timing), box-shadow var(--transition-speed) var(--transition-timing);
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        #möjligheter.is-visible .step-card:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+
+        #möjligheter.is-visible .step-card:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        #möjligheter.is-visible .step-card:nth-child(3) {
+            transition-delay: 0.4s;
+        }
+
+        #möjligheter.is-visible .step-card:nth-child(4) {
+            transition-delay: 0.5s;
+        }
+
+        #möjligheter.is-visible .step-card:nth-child(5) {
+            transition-delay: 0.6s;
+        }
+
+
+        #möjligheter.is-visible .step-card {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+
+        .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary-color);
+            /* Teal effect */
+            border-radius: 50%;
+            opacity: 0.08;
+            transition: transform 0.5s ease-out;
+        }
+
+        .step-card:hover::before {
+            transform: scale(1.5);
+        }
+
+        .step-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            /* Teal icon */
+            margin-bottom: 1.2rem;
+            display: block;
+            transition: transform 0.4s ease-out;
+        }
+
+        .step-card:hover i {
+            transform: rotateY(360deg);
+        }
+
+        .step-card h3 {
+            font-size: 1.1rem;
+            /* Adjusted size */
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            font-size: 0.9rem;
+            /* Adjusted size */
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+
+        /* Karta */
+        #kartan {
+            background-color: var(--bg-alt-color);
+            /* Alternating bg */
+        }
+
+        #kartan .map-container {
+            background: var(--card-bg-color);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-top: 2rem;
+        }
+
+        #kartan h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        #kartan .section-subtitle {
+            margin-bottom: 2rem;
+        }
+
+        .puff-section {
+            background-color: #f0f8ff;
+            /* AliceBlue - a very light, distinct blue */
+            padding: 2.5rem 0;
+            margin-top: -50px;
+            /* Adjust to pull it up slightly below the hero curve */
+            position: relative;
+            /* Needed for z-index */
+            z-index: 2;
+            /* Ensure it's above the main content start */
+            border-bottom: 1px solid #ddeeff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .puff-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background-color: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .puff-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            /* Teal */
+            flex-shrink: 0;
+            padding-right: 1rem;
+            border-right: 1px solid #eee;
+            /* Separator line */
+        }
+
+        .puff-text {
+            flex-grow: 1;
+            /* Takes up available space */
+        }
+
+        .puff-text h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .puff-text p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        .puff-text strong {
+            color: var(--primary-darker);
+            /* Darker teal for emphasis */
+            font-weight: 600;
+        }
+
+        .puff-action {
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .cta-button-puff {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            /* Prevent button text wrapping */
+            margin-bottom: 0.5rem;
+            /* Space before note */
+        }
+
+        .cta-button-puff i {
+            margin-right: 8px;
+        }
+
+        .cta-button-puff:hover {
+            background: var(--primary-darker);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .puff-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        /* --- KPI Section Styling --- */
+        #nyckeltal {
+            background-color: var(--bg-alt-color);
+            /* Match alternating background */
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .kpi-card {
+            background-color: var(--card-bg-color);
+            padding: 2rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .kpi-icon i {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            /* Teal */
+            margin-bottom: 1rem;
+            display: block;
+            /* Center icon */
+        }
+
+        .kpi-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            /* Dark blue for numbers */
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .kpi-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .map-responsive {
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            position: relative;
+            height: 0;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-inset);
+        }
+
+        .map-responsive iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            border: 0;
+        }
+
+        /* Dialog med Hallandstrafiken */
+        #dialog {
+            /* Standard bg */
+        }
+
+        #dialog .dialog-content {
+            max-width: 800px;
+            margin: 2rem auto 0 auto;
+            background-color: var(--bg-alt-color);
+            /* Subtle contrast */
+            padding: 2rem;
+            border-radius: var(--border-radius-md);
+            border-left: 5px solid var(--primary-color);
+            /* Teal accent border */
+            box-shadow: var(--shadow-sm);
+        }
+
+        #dialog h3 {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        #dialog p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        /* Kontakt Section */
+        #kontakt {
+            background-color: #eef5f5;
+            /* Very light teal like original contact */
+            text-align: center;
+            /* Center the contact-info block */
+        }
+
+        .contact-info {
+            display: inline-flex;
+            /* Use inline-flex to center the block, flex for content */
+            align-items: center;
+            /* Vertically align image and text */
+            gap: 2rem;
+            /* Space between image and text */
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
+            max-width: 550px;
+            /* Increase max-width to fit image + text */
+            margin-top: 2rem;
+            text-align: left;
+            /* Reset text align for content inside */
+        }
+
+        /* === ADDED/UPDATED STYLES FOR IMAGE === */
+        .contact-photo {
+            width: 120px;
+            /* Adjust size as needed */
+            height: 120px;
+            border-radius: 50%;
+            /* Make it circular */
+            object-fit: cover;
+            /* Ensure image covers the area nicely */
+            flex-shrink: 0;
+            /* Prevent image from shrinking */
+            box-shadow: var(--shadow-sm);
+            border: 3px solid white;
+            /* Optional white border */
+        }
+
+        .contact-text {
+            /* Wrapper for text content if needed for specific alignment */
+            flex-grow: 1;
+            /* Allow text block to take remaining space */
+        }
+
+        /* === END OF ADDED/UPDATED STYLES === */
+
+        .contact-info h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.4rem;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .contact-info p strong {
+            color: var(--text-color);
+            display: block;
+            /* Name on its own line */
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            font-weight: 700;
+            /* Make title bold */
+        }
+
+        .contact-info a {
+            color: var(--primary-color);
+            font-weight: 500;
+            word-break: break-all;
+            /* Prevent long emails/numbers breaking layout */
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-darker);
+            text-decoration: underline;
+        }
+
+        /* Call to Action (CTA) - Kraftfull Avslutning */
+        #cta-enkät {
+            /* Renamed ID */
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #1a2b48 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 6rem 0;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #cta-enkät::before,
+        #cta-enkät::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(53, 138, 144, 0.1);
+            /* Use teal for effect */
+            z-index: 0;
+        }
+
+        #cta-enkät::before {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            left: -50px;
+        }
+
+        #cta-enkät::after {
+            width: 150px;
+            height: 150px;
+            bottom: -70px;
+            right: -30px;
+            transform: rotate(45deg);
+        }
+
+
+        #cta-enkät .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        #cta-enkät h2 {
+            color: var(--primary-color);
+            /* Teal heading */
+            margin-bottom: 1.5rem;
+        }
+
+        #cta-enkät p {
+            color: #e2e8f0;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1.5rem;
+            /* Spacing between paragraphs */
+            font-size: 1.1rem;
+        }
+
+        #cta-enkät b,
+        #cta-enkät strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .button-wrapper {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow buttons to wrap on small screens */
+            justify-content: center;
+            gap: 1.5rem;
+            /* Space between buttons */
+        }
+
+        .cta-button-large {
+            background: var(--primary-color);
+            /* Teal background */
+            color: #ffffff;
+            /* White text */
+            padding: 18px 40px;
+            /* Slightly adjusted padding */
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            /* Adjusted size */
+            text-align: center;
+            transition: all var(--transition-speed) var(--transition-timing);
+            box-shadow: var(--shadow-lg), 0 0 20px rgba(53, 138, 144, 0.3);
+            /* Teal glow */
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button-large i {
+            font-size: 1.1rem;
+            /* Match text size */
+            transition: transform 0.3s ease-out;
+        }
+
+        .cta-button-large::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            /* Softer shine */
+            transition: left 0.6s ease-out;
+            z-index: -1;
+        }
+
+        .cta-button-large:hover {
+            background: var(--primary-darker);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(53, 138, 144, 0.5);
+            /* Stronger teal glow */
+        }
+
+        .cta-button-large:hover::before {
+            left: 100%;
+        }
+
+        .cta-button-large:hover i {
+            transform: translateX(5px);
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            background: var(--footer-bg-color);
+            color: var(--footer-text-color);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 0;
+            /* Remove margin if CTA is directly above */
+        }
+
+        footer p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: var(--footer-text-color);
+            text-decoration: underline;
+            opacity: 0.9;
+        }
+
+        footer a:hover {
+            opacity: 1;
+            color: #fff;
+        }
+
+        /* --- Responsivitet --- */
+        @media (max-width: 992px) {
+            /* Minor adjustments if needed */
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+
+            .container {
+                width: 95%;
+                padding: 0 15px;
+            }
+
+            header.hero {
+                padding: 5rem 0 6rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+                margin-bottom: -30px;
+            }
+
+            .scroll-down-indicator {
+                bottom: 45px;
+            }
+
+            .content-section {
+                padding: 3rem 0;
+            }
+
+            #bakgrund {
+                padding-top: 5rem;
+            }
+
+            .parallax-section {
+                background-attachment: scroll;
+                min-height: 40vh;
+            }
+
+            .opportunities-flow {
+                grid-template-columns: 1fr;
+            }
+
+            /* Stack cards */
+            #studien .study-steps {
+                grid-template-columns: 1fr;
+            }
+
+            /* Stack study steps */
+
+            .cta-button-large {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 2rem 0;
+            }
+
+            #dialog .dialog-content {
+                padding: 1.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                /* Stack image and text */
+                max-width: 90%;
+                padding: 1.5rem;
+                text-align: center;
+                /* Center text below image */
+                gap: 1.5rem;
+                /* Adjust gap for stacked layout */
+            }
+
+            .contact-photo {
+                width: 100px;
+                /* Slightly smaller on mobile */
+                height: 100px;
+                /* margin-bottom: 1rem; Remove default margin if gap is used */
+            }
+
+            .contact-info p,
+            .contact-info h3 {
+                text-align: center;
+                /* Ensure text is centered */
+            }
+
+            .button-wrapper {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .cta-button-large {
+                width: 80%;
+                justify-content: center;
+            }
+
+            .puff-content {
+                flex-direction: column;
+                /* Stack elements */
+                text-align: center;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .puff-icon {
+                padding-right: 0;
+                border-right: none;
+                margin-bottom: 0.5rem;
+                /* Space below icon */
+                font-size: 2.2rem;
+            }
+
+            .puff-text h3 {
+                font-size: 1.2rem;
+            }
+
+            .puff-text p {
+                font-size: 0.95rem;
+            }
+
+            .puff-action {
+                margin-top: 1rem;
+                /* Space above button */
+            }
+        }
+
+        #kartan .container {
+            padding-left: 0;
+            /* Remove side padding for the container */
+            padding-right: 0;
+            width: 100%;
+            /* Ensure it spans full width */
+            max-width: none;
+            /* Override the default max-width */
+        }
+
+        #kartan .map-container {
+            padding: 0.5rem;
+            /* Drastically reduce padding around the map iframe */
+            margin-top: 1.5rem;
+            /* Adjust margin if needed */
+            border-radius: 0;
+            /* Optional: Remove border-radius if it looks better edge-to-edge */
+            box-shadow: none;
+            /* Optional: Remove shadow if going edge-to-edge */
+        }
+
+        /* Add padding back to text elements so they don't touch the edge */
+        #kartan h2,
+        #kartan .section-subtitle {
+            padding-left: 15px;
+            /* Add back standard padding for text */
+            padding-right: 15px;
+            max-width: 95%;
+            /* Prevent very long lines if subtitle is long */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 480px) {
+            header.hero h1 {
+                font-size: 2rem;
+            }
+
+            header.hero p.subtitle {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.6rem;
+            }
+
+            .step-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .step-card i {
+                font-size: 2.5rem;
+            }
+
+            .cta-button-large {
+                width: 90%;
+                font-size: 0.95rem;
+                padding: 14px 30px;
+            }
+
+            #studien .step-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            #studien .step-icon i {
+                margin-bottom: 0.5rem;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="hero">
+        <div class="container">
+            <h1>Förstudie: Inpendling till Falkenbergs Verksamhetsområden</h1>
+            <p class="subtitle">En undersökning om pendlingsmönster och underlaget för förbättrad kollektivtrafik och
+                andra transportlösningar.</p>
+            <div class="scroll-down-indicator">
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+    </header>
+    <!-- === NEW PUFF SECTION === -->
+    <section id="puff-foretag" class="puff-section">
+        <div class="container">
+            <div class="puff-content">
+                <div class="puff-icon">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div class="puff-text">
+                    <h3>Är du Företagsledare i Fokusområdena?</h3>
+                    <p>
+                        Vi söker aktivt företagare i <strong>Smedjeholm/Västra Gärdet, Ågård, Vinbergsmotet,
+                            Hamnområdet, Bacchus,</strong> och <strong>Tånga</strong> som vill bidra till förstudien.
+                        Ditt engagemang är avgörande för att vi ska kunna identifiera och driva igenom bättre
+                        pendlingsmöjligheter.
+                    </p>
+                </div>
+                <div class="puff-action">
+                    <a href="mailto:frej.andreassen@falkenberg.se?subject=Intresseanmälan Förstudie Inpendling"
+                        class="cta-button-puff">
+                        <i class="fa-solid fa-envelope"></i> Anmäl Intresse Här!
+                    </a>
+                    <p class="puff-note">Skicka ett mail för att delta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main>
+        <!-- Bakgrund & Syfte Section -->
+        <section id="bakgrund" class="content-section animated-section">
+            <div class="container">
+                <div class="intro-content">
+                    <h2><i class="fa-solid fa-bullseye"></i>Bakgrund och Syfte</h2>
+                    <p>
+                        Falkenbergs kommun genomför just nu en förstudie kring arbetspendlingen till våra stadsnära
+                        verksamhetsområden. Vi vill få en bättre bild av hur många som pendlar in till dessa områden och
+                        om det finns ett tillräckligt underlag för att utveckla kollektivtrafiken eller andra smarta
+                        transportlösningar.
+                    </p>
+                    <p>
+                        Vi uppskattar att mellan <strong>7000 och 8000 personer</strong> arbetar vid aktiebolag i
+                        Falkenbergs tätort med omnejd. Av dessa arbetar uppskattningsvis <strong>4000 personer</strong>
+                        i de viktiga, närliggande verksamhetsområdena <b>Smedjeholm, Ågård, Vinbergsmotet, Bacchus,
+                            Hamnområdet och Tånga</b>.
+                    </p>
+                    <p>
+                        Idag är kollektivtrafiken till flera av dessa områden begränsad eller obefintlig. Detta kan
+                        försvåra rekrytering för företagen och skapar ofta ett onödigt beroende av personbil för de
+                        anställda.
+                    </p>
+                    <p>
+                        Denna förstudie syftar till att undersöka det faktiska behovet och samla in konkret underlag.
+                        Målet är att kunna fatta välgrundade beslut om framtida satsningar på effektiva och hållbara
+                        transportlösningar. Vi för en aktiv <a href="#dialog" class="text-link">dialog med
+                            Hallandstrafiken</a> för att säkerställa att vårt arbete kompletterar befintliga initiativ
+                        på bästa sätt.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- === NEW KPI SECTION === -->
+        <section id="nyckeltal" class="content-section animated-section">
+            <div class="container">
+                <h2>Verksamhetsområdena i Siffror</h2>
+                <p class="section-subtitle">Förstå skalan: tusentals människor arbetar dagligen i Falkenbergs
+                    tätortsnära företagsområden.</p>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+                        <span class="kpi-number">7000-8000</span>
+                        <p>Uppskattat antal anställda vid aktiebolag i Falkenbergs tätort med omnejd.</p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon"><i class="fa-solid fa-industry"></i></div>
+                        <span class="kpi-number">~4000</span>
+                        <p>Arbetar i de primära fokusområdena (Smedjeholm, Ågård, Vinbergsmotet, Bacchus, Hamnen,
+                            Tånga).</p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon"><i class="fa-solid fa-bus"></i></div>
+                        <span class="kpi-number">Begränsad</span>
+                        <p>Nuvarande kollektivtrafikförsörjning till flera av dessa nyckelområden.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- === END OF NEW KPI SECTION === -->
+
+        <!-- Parallax Bild Sektion -->
+        <section id="visual-break" class="parallax-section is-visible"
+            aria-label="Vy över Falkenbergs industriområde eller transportnav">
+            <div class="parallax-content animated-section">
+                <h3>Potential för Smidigare Flöden</h3>
+                <p>Tusentals resor sker varje dag – hur kan vi göra dem bättre?</p>
+            </div>
+        </section>
+
+        <!-- Så går studien till Section -->
+        <section id="studien" class="content-section animated-section">
+            <div class="container">
+                <h2>Så Går Studien Till – Vi Behöver Din Hjälp!</h2>
+                <p class="section-subtitle">För att få en korrekt och heltäckande bild av nuläget och behoven samlar vi
+                    in data direkt från er som berörs mest – företagen och medarbetarna.</p>
+                <div class="study-steps">
+                    <div class="step-item">
+                        <div class="step-icon"><i class="fa-solid fa-building"></i></div>
+                        <div class="step-text">
+                            <h3>Företagsenkät</h3>
+                            <p>Information om antal anställda, typiska arbetstider (inkl. skift), och företagets
+                                perspektiv på transporter, rekryteringsutmaningar och hållbarhet.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon"><i class="fa-solid fa-user-group"></i></div>
+                        <div class="step-text">
+                            <h3>Medarbetarenkät</h3>
+                            <p>Fokus på individuella pendlingsvanor: nuvarande transportmedel, restider,
+                                start-/sluttider, samt upplevda hinder och önskemål kring kollektiva lösningar.</p>
+                        </div>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 3rem; color: var(--text-light);">
+                    Båda enkäterna lanseras inom kort. Ditt deltagande är <b>avgörande</b> för studiens framgång!
+                </p>
+            </div>
+        </section>
+
+        <!-- Möjligheter (Varför delta?) Section -->
+        <section id="möjligheter" class="content-section animated-section">
+            <div class="container">
+                <h2>Varför Delta? Möjliga Positiva Effekter</h2>
+                <p class="section-subtitle">Ett starkt engagemang och hög svarsfrekvens ger oss ett kraftfullt underlag
+                    för att driva verklig förändring. En framgångsrik förstudie kan bana väg för:</p>
+                <div class="opportunities-flow">
+                    <div class="step-card">
+                        <i class="fa-solid fa-bus-simple"></i>
+                        <h3>Nya Busslinjer</h3>
+                        <p>Anpassade rutter och tätare avgångar som matchar arbetstiderna.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                        <h3>Gemensamma Lösningar</h3>
+                        <p>Samordnad transport, finansierad gemensamt av företag i området.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fa-solid fa-bicycle"></i>
+                        <h3>Bättre Cykelinfra</h3>
+                        <p>Utbyggda cykelvägar, säkra parkeringar eller lånecykelstationer.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fa-solid fa-robot"></i>
+                        <h3>Innovativa Alternativ</h3>
+                        <p>Flexibla pendlingstjänster, anropsstyrd trafik eller framtida autonoma skyttlar.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <h3>Stärkt Attraktivitet</h3>
+                        <p>Lättare att rekrytera och behålla personal, mer hållbara pendlingsval.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Karta Section -->
+        <section id="kartan" class="content-section animated-section">
+            <div class="container">
+                <h2>Fokusområden För Studien</h2>
+                <p class="section-subtitle">Kartan visar de primära verksamhetsområdena som ingår i förstudien:
+                    Smedjeholm, Ågård, Vinbergsmotet, Bacchus, Hamnområdet och Tånga.</p>
+                <div class="map-container">
+                    <div class="map-responsive">
+                        <iframe
+                            src="https://www.google.com/maps/d/u/6/embed?mid=1_52AWOMK170yl3wlhl2_p-b2orzSk18&ehbc=2E312F&noprof=1"
+                            width="640" height="480" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dialog med Hallandstrafiken Section -->
+        <section id="dialog" class="content-section animated-section">
+            <div class="container">
+                <h2>Dialog med Hallandstrafiken</h2>
+                <p class="section-subtitle">Vi samarbetar för att hitta de bästa lösningarna.</p>
+                <div class="dialog-content">
+                    <h3>Värdefull Input</h3>
+                    <p>
+                        I vår dialog med Hallandstrafiken har vi fått insikter om deras datakällor (som
+                        befolkningsstatistik, resvaneundersökningar, biljettdata) och prioriteringsfaktorer. De betonar
+                        vikten av att väga nya satsningar mot befintliga behov och helheten i linjenätet. De ser
+                        positivt på vår enkätundersökning och har bidragit med förslag på relevanta frågor om
+                        tidpunkter, hinder för kollektivtrafik och intresse för alternativa lösningar, vilket vi
+                        integrerar i enkäterna.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontakt Section -->
+        <section id="kontakt" class="content-section animated-section">
+            <div class="container">
+                <h2>Projektledare</h2>
+                <div class="contact-info">
+                    <!-- === ADDED IMAGE HERE === -->
+                    <img src="https://www.falkenbergsnaringsliv.se/templates/yootheme/cache/f5/frej_andreassen-f52737c4.webp"
+                        alt="Porträttbild på Frej Andreassen" class="contact-photo">
+                    <!-- === END OF ADDED IMAGE === -->
+                    <div class="contact-text"> <!-- Added wrapper for text -->
+                        <h3>Frej Andreassen</h3>
+                        <p><strong>Projektledare</strong></p>
+                        <p>Näringslivsenheten, Falkenbergs kommun</p>
+                        <p><i class="fa-solid fa-phone" style="margin-right: 8px; color: var(--primary-color);"></i><a
+                                href="tel:+46706920705">070-692 07 05</a></p>
+                        <p><i class="fa-solid fa-envelope"
+                                style="margin-right: 8px; color: var(--primary-color);"></i><a
+                                href="mailto:frej.andreassen@falkenberg.se">frej.andreassen@falkenberg.se</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Call to Action (CTA) Section -->
+        <section id="cta-enkät" class="content-section animated-section">
+            <div class="container">
+                <h2>Din Röst Är Avgörande – Delta i Enkäten!</h2>
+                <p>
+                    För att kunna presentera övertygande underlag och driva på utvecklingen behöver vi data direkt från
+                    er som pendlar och driver företag i områdena. Dina erfarenheter, behov och idéer är ovärderliga.
+                </p>
+                <p>
+                    <b>Är du företagare eller medarbetare i något av de berörda områdena?</b> Ta några minuter och fyll
+                    i relevant enkät. Varje svar är ett viktigt steg mot smidigare, effektivare och mer hållbara
+                    pendlingslösningar för Falkenberg.
+                </p>
+                <div class="button-wrapper">
+                    <!-- LÄNKARNA NEDAN ÄR PLATSHÅLLARE - BYT UT MOT RIKTIGA ENKÄTLÄNKAR -->
+                    <a href="#enkat-foretag-kommer-snart" class="cta-button-large">
+                        <i class="fa-solid fa-building"></i> Till Enkäten för Företagare
+                    </a>
+                    <a href="#enkat-medarbetare-kommer-snart" class="cta-button-large">
+                        <i class="fa-solid fa-user-group"></i> Till Enkäten för Medarbetare
+                    </a>
+                </div>
+                <p style="margin-top: 2rem; font-size: 0.9rem; color: #a0aec0;">(Enkäterna lanseras inom kort - sidan
+                    uppdateras då med aktiva länkar)</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© <span id="current-year"></span> Falkenbergs Kommun - Näringslivsenheten | Förstudie Inpendling
+                Verksamhetsområden</p>
+            <!-- Optional: Add link back to main falkenberg.se or similar -->
+            <p style="margin-top: 0.5rem;"><a href="https://www.falkenberg.se" target="_blank"
+                    rel="noopener noreferrer">www.falkenberg.se</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Årtal i footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Intersection Observer för animationer
+        const animatedSections = document.querySelectorAll('.animated-section');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 // Trigger när 15% är synligt
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+
+                    // Hantera individuella animationer inuti sektioner (t.ex. steg-korten)
+                    // Uppdaterat ID från #problemet till #möjligheter
+                    if (entry.target.id === 'möjligheter') {
+                        const stepCards = entry.target.querySelectorAll('.step-card');
+                        stepCards.forEach((card, cardIndex) => {
+                            // Lägger till liten delay mellan korten
+                            card.style.transitionDelay = `${cardIndex * 0.1 + 0.1}s`;
+                        });
+                    }
+
+                    observer.unobserve(entry.target); // Sluta observera när den blivit synlig
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        animatedSections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Säkerställ att parallax-innehåll animeras när HELA parallax-sektionen blir synlig
+        // Modifierad för att fungera med flera parallax-sektioner om det skulle behövas
+        const parallaxSections = document.querySelectorAll('.parallax-section');
+        parallaxSections.forEach(parallaxSection => {
+            const parallaxContent = parallaxSection.querySelector('.parallax-content.animated-section');
+            if (parallaxContent) {
+                const parallaxObserverOptions = { root: null, threshold: 0.15 }; // Tröskel för när parallaxen ska animera sitt innehåll
+                const parallaxObserverCallback = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            parallaxContent.classList.add('is-visible');
+                            observer.unobserve(entry.target); // Observera bara parallax-sektionen en gång
+                        }
+                    });
+                };
+                const parallaxObserver = new IntersectionObserver(parallaxObserverCallback, parallaxObserverOptions);
+                parallaxObserver.observe(parallaxSection); // Observera hela parallax-sektionen
+            } else {
+                // Om parallax-sektionen själv ska animeras (inte bara innehållet)
+                if (parallaxSection.classList.contains('animated-section')) {
+                    observer.observe(parallaxSection);
+                }
+            }
+        });
+
+
+    </script>
+
+</body>
+
+</html>
